@@ -1,0 +1,146 @@
+syntax = "proto3";
+
+package api.role.v1;
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+option go_package = "unlimited/api/role/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.role.v1";
+// 角色管理
+service Role {
+	// 检查角色权限
+	rpc CheckAct (CheckActRequest) returns (CheckActReply){
+		option(google.api.http) = {
+			post: "/authorization/role/v1/CheckAct",
+			body: "*"
+		};
+	}
+	// 创建角色
+	rpc CreateRole (CreateRoleRequest) returns (CreateRoleReply){
+		option(google.api.http) = {
+			post: "/authorization/role/v1/CreateRole",
+			body: "*"
+		};
+	};
+	// 编辑角色
+	rpc UpdateRole (UpdateRoleRequest) returns (RoleReply){
+		option(google.api.http) = {
+			post: "/authorization/role/v1/UpdateRole",
+			body: "*"
+		};
+	};
+	// 删除角色
+	rpc DeleteRole (DeleteRoleRequest) returns (RoleReply){
+		option(google.api.http) = {
+			get: "/authorization/role/v1/DeleteRole",
+		};
+	};
+	// 获取角色
+	rpc GetRole (GetRoleRequest) returns (GetRoleReply){
+		option(google.api.http) = {
+			get: "/authorization/role/v1/GetRole",
+		};
+	};
+	// 获取角色列表
+	rpc ListRole (ListRoleRequest) returns (ListRoleReply){
+		option(google.api.http) = {
+			get: "/authorization/role/v1/ListRole",
+		};
+	};
+}
+
+
+message RoleReply {
+	bool status = 1;
+}
+// 角色创建
+message CreateRoleRequest {
+	// 角色名称
+	string roleName = 1 [(validate.rules).string = {min_len: 1, max_len: 255}];
+	// 角色状态 1正常 2不正常
+	int32  roleStatus = 2 [(validate.rules).int32 = {in: [1, 2]}];
+	// 角色主键
+	string roleKey = 3 [(validate.rules).string = {min_len: 1, max_len: 255}];
+	// 角色排序
+	int64 roleSort = 4;
+	// 角色备注
+	string  roleRemark = 5 [(validate.rules).string = {min_len:1,max_len:255}];
+	// 是否是管理员
+	bool roleAdmin = 6;
+	// 菜单ID
+	repeated uint64 menuIds = 7;
+	// 部门ID
+	repeated int64 deptIds = 8;
+}
+// 角色创建回复
+message CreateRoleReply {
+	// 添加状态
+	bool status = 1;
+}
+// 编辑角色
+message UpdateRoleRequest {
+	// 角色ID
+	uint64 roleId = 1;
+	// 角色名称
+	string roleName = 2 [(validate.rules).string = {min_len: 1, max_len: 255}];
+	// 角色状态 1正常 2不正常
+	int32  roleStatus = 3 [(validate.rules).int32 = {in: [1, 2]}];
+	// 角色主键
+	string roleKey = 4 [(validate.rules).string = {min_len: 1, max_len: 255}];
+	// 角色排序
+	int64 roleSort = 5;
+	// 角色备注
+	string  roleRemark = 6 [(validate.rules).string = {min_len:1,max_len:255}];
+	// 是否是管理员
+	bool roleAdmin = 7;
+	// 菜单ID
+	repeated uint64 menuIds = 8;
+	// 部门ID
+	repeated int64 deptIds = 9;
+}
+// 删除角色
+message DeleteRoleRequest {
+	string ids = 1;
+}
+// 查询角色
+message GetRoleRequest {
+	uint64 id = 1;
+}
+// 查询角色回复
+message GetRoleReply {
+	uint64 role_id = 1;
+	string role_name = 2;
+	int32 role_status = 3;
+	string role_key = 4;
+	int64 role_sort = 5;
+	string role_flag = 6;
+	string role_remark = 7;
+	int32 role_admin = 8;
+	string role_data_scope = 9;
+	string created_at = 10;
+	string updated_at = 11;
+	string deleted_at = 12;
+	uint64 role_emp_id = 13;
+	repeated RoleMenu role_menu = 14;
+}
+// 角色菜单查询
+message RoleMenu {
+	uint64 role_id = 1;
+	uint64 menu_id = 2;
+}
+// 角色列表
+message ListRoleRequest {}
+// 角色列表回复
+message ListRoleReply {
+	repeated GetRoleReply list = 1;
+}
+// 检查角色权限
+message CheckActRequest{
+	string key = 1;
+	string url = 2;
+	string method = 3;
+}
+// 检查角色权限回复
+message CheckActReply{
+	bool status = 1;
+}

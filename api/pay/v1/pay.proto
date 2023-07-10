@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package api.pay.v1;
+import "google/api/annotations.proto";
+option go_package = "unlimited/api/pay/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.pay.v1";
+
+service Pay {
+	rpc CreatePay (CreatePayRequest) returns (CreatePayReply){
+		option(google.api.http) = {
+			post: "/pay/v1/CreatePay",
+			body: "*"
+		};
+	};
+	rpc GetPay (GetPayRequest) returns (GetPayReply);
+}
+
+message CreatePayRequest {
+	// 订单前缀
+	string orderPrefix = 1;
+	// 用户标识
+	string email = 2;
+	// 用户所属国家
+	string  country = 3;
+	// 订单金额
+	double   amount = 4;
+	// 货币
+	string currency = 5;
+	// 返回Url
+	string returnUrl = 6;
+	// 支付参数
+	PayOption pay = 7;
+}
+
+// 支付参数
+message PayOption {
+	// 支付类型
+	string type = 1;
+	// 支付参数
+	string parameter = 2;
+	// 商品参数
+	repeated Shop shop = 3;
+	// 简介
+	string description = 4;
+}
+
+// 商品参数
+message Shop {
+		string name = 1;
+		string price = 2;
+		string num = 3;
+		string currency = 4;
+}
+
+message CreatePayReply {
+	string orderId = 1;
+	string url = 2;
+}
+
+message GetPayRequest {}
+message GetPayReply {}

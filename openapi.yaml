@@ -1,0 +1,603 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /authorization/menu/v1/CreateMenu:
+        post:
+            tags:
+                - Menu
+            description: CreateMenu 创建菜单
+            operationId: Menu_CreateMenu
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.role.v1.CreateMenuRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.MenuReply'
+    /authorization/menu/v1/DeleteMenu:
+        get:
+            tags:
+                - Menu
+            description: DeleteMenu 删除菜单
+            operationId: Menu_DeleteMenu
+            parameters:
+                - name: ids
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.MenuReply'
+    /authorization/menu/v1/GetMenu:
+        get:
+            tags:
+                - Menu
+            description: GetMenu 查询单挑菜单信息
+            operationId: Menu_GetMenu
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.GetMenuReply'
+    /authorization/menu/v1/ListMenu:
+        get:
+            tags:
+                - Menu
+            description: ListMenu 获取菜单列表
+            operationId: Menu_ListMenu
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.ListMenuReply'
+    /authorization/menu/v1/ListMenuTree:
+        get:
+            tags:
+                - Menu
+            description: ListMenuTree 获取树形列表
+            operationId: Menu_ListMenuTree
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.ListMenuReply'
+    /authorization/menu/v1/UpdateMenu:
+        post:
+            tags:
+                - Menu
+            description: UpdateMenu 编辑菜单
+            operationId: Menu_UpdateMenu
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.role.v1.UpdateMenuRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.MenuReply'
+    /authorization/role/v1/CheckAct:
+        post:
+            tags:
+                - Role
+            description: 检查角色权限
+            operationId: Role_CheckAct
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.role.v1.CheckActRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.CheckActReply'
+    /authorization/role/v1/CreateRole:
+        post:
+            tags:
+                - Role
+            description: 创建角色
+            operationId: Role_CreateRole
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.role.v1.CreateRoleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.CreateRoleReply'
+    /authorization/role/v1/DeleteRole:
+        get:
+            tags:
+                - Role
+            description: 删除角色
+            operationId: Role_DeleteRole
+            parameters:
+                - name: ids
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.RoleReply'
+    /authorization/role/v1/GetRole:
+        get:
+            tags:
+                - Role
+            description: 获取角色
+            operationId: Role_GetRole
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.GetRoleReply'
+    /authorization/role/v1/ListRole:
+        get:
+            tags:
+                - Role
+            description: 获取角色列表
+            operationId: Role_ListRole
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.ListRoleReply'
+    /authorization/role/v1/UpdateRole:
+        post:
+            tags:
+                - Role
+            description: 编辑角色
+            operationId: Role_UpdateRole
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.role.v1.UpdateRoleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.role.v1.RoleReply'
+    /pay/v1/CreatePay:
+        post:
+            tags:
+                - Pay
+            operationId: Pay_CreatePay
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.pay.v1.CreatePayRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.pay.v1.CreatePayReply'
+components:
+    schemas:
+        api.pay.v1.CreatePayReply:
+            type: object
+            properties:
+                orderId:
+                    type: string
+                url:
+                    type: string
+        api.pay.v1.CreatePayRequest:
+            type: object
+            properties:
+                orderPrefix:
+                    type: string
+                    description: 订单前缀
+                email:
+                    type: string
+                    description: 用户标识
+                country:
+                    type: string
+                    description: 用户所属国家
+                amount:
+                    type: number
+                    description: 订单金额
+                    format: double
+                currency:
+                    type: string
+                    description: 货币
+                returnUrl:
+                    type: string
+                    description: 返回Url
+                pay:
+                    $ref: '#/components/schemas/api.pay.v1.PayOption'
+        api.pay.v1.PayOption:
+            type: object
+            properties:
+                type:
+                    type: string
+                    description: 支付类型
+                parameter:
+                    type: string
+                    description: 支付参数
+                shop:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.pay.v1.Shop'
+                    description: 商品参数
+                description:
+                    type: string
+                    description: 简介
+            description: 支付参数
+        api.pay.v1.Shop:
+            type: object
+            properties:
+                name:
+                    type: string
+                price:
+                    type: string
+                num:
+                    type: string
+                currency:
+                    type: string
+            description: 商品参数
+        api.role.v1.CheckActReply:
+            type: object
+            properties:
+                status:
+                    type: boolean
+            description: 检查角色权限回复
+        api.role.v1.CheckActRequest:
+            type: object
+            properties:
+                key:
+                    type: string
+                url:
+                    type: string
+                method:
+                    type: string
+            description: 检查角色权限
+        api.role.v1.CreateMenuRequest:
+            type: object
+            properties:
+                userId:
+                    type: integer
+                    format: uint64
+                menuName:
+                    type: string
+                icon:
+                    type: string
+                path:
+                    type: string
+                ancestors:
+                    type: string
+                menuType:
+                    type: string
+                action:
+                    type: string
+                permission:
+                    type: string
+                parentId:
+                    type: integer
+                    format: uint64
+                breadcrumb:
+                    type: string
+                component:
+                    type: string
+                sort:
+                    type: integer
+                    format: uint64
+                visible:
+                    type: integer
+                    format: uint64
+                isFrame:
+                    type: integer
+                    format: uint64
+        api.role.v1.CreateRoleReply:
+            type: object
+            properties:
+                status:
+                    type: boolean
+                    description: 添加状态
+            description: 角色创建回复
+        api.role.v1.CreateRoleRequest:
+            type: object
+            properties:
+                roleName:
+                    type: string
+                    description: 角色名称
+                roleStatus:
+                    type: integer
+                    description: 角色状态 1正常 2不正常
+                    format: int32
+                roleKey:
+                    type: string
+                    description: 角色主键
+                roleSort:
+                    type: integer
+                    description: 角色排序
+                    format: int64
+                roleRemark:
+                    type: string
+                    description: 角色备注
+                roleAdmin:
+                    type: boolean
+                    description: 是否是管理员
+                menuIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: uint64
+                    description: 菜单ID
+                deptIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+                    description: 部门ID
+            description: 角色创建
+        api.role.v1.GetMenuReply:
+            type: object
+            properties:
+                menuId:
+                    type: integer
+                    format: uint64
+                menuName:
+                    type: string
+                icon:
+                    type: string
+                path:
+                    type: string
+                ancestors:
+                    type: string
+                menuType:
+                    type: string
+                action:
+                    type: string
+                permission:
+                    type: string
+                parentId:
+                    type: integer
+                    format: uint64
+                breadcrumb:
+                    type: string
+                component:
+                    type: string
+                sort:
+                    type: integer
+                    format: uint64
+                visible:
+                    type: integer
+                    format: uint64
+                isFrame:
+                    type: integer
+                    format: uint64
+                children:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.role.v1.GetMenuReply'
+        api.role.v1.GetRoleReply:
+            type: object
+            properties:
+                roleId:
+                    type: integer
+                    format: uint64
+                roleName:
+                    type: string
+                roleStatus:
+                    type: integer
+                    format: int32
+                roleKey:
+                    type: string
+                roleSort:
+                    type: integer
+                    format: int64
+                roleFlag:
+                    type: string
+                roleRemark:
+                    type: string
+                roleAdmin:
+                    type: integer
+                    format: int32
+                roleDataScope:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                deletedAt:
+                    type: string
+                roleEmpId:
+                    type: integer
+                    format: uint64
+                roleMenu:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.role.v1.RoleMenu'
+            description: 查询角色回复
+        api.role.v1.ListMenuReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.role.v1.GetMenuReply'
+        api.role.v1.ListRoleReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.role.v1.GetRoleReply'
+            description: 角色列表回复
+        api.role.v1.MenuReply:
+            type: object
+            properties:
+                status:
+                    type: boolean
+        api.role.v1.RoleMenu:
+            type: object
+            properties:
+                roleId:
+                    type: integer
+                    format: uint64
+                menuId:
+                    type: integer
+                    format: uint64
+            description: 角色菜单查询
+        api.role.v1.RoleReply:
+            type: object
+            properties:
+                status:
+                    type: boolean
+        api.role.v1.UpdateMenuRequest:
+            type: object
+            properties:
+                userId:
+                    type: integer
+                    format: uint64
+                menuId:
+                    type: integer
+                    format: uint64
+                menuName:
+                    type: string
+                icon:
+                    type: string
+                path:
+                    type: string
+                ancestors:
+                    type: string
+                menuType:
+                    type: string
+                action:
+                    type: string
+                permission:
+                    type: string
+                parentId:
+                    type: integer
+                    format: uint64
+                breadcrumb:
+                    type: string
+                component:
+                    type: string
+                sort:
+                    type: integer
+                    format: uint64
+                visible:
+                    type: integer
+                    format: uint64
+                isFrame:
+                    type: integer
+                    format: uint64
+        api.role.v1.UpdateRoleRequest:
+            type: object
+            properties:
+                roleId:
+                    type: integer
+                    description: 角色ID
+                    format: uint64
+                roleName:
+                    type: string
+                    description: 角色名称
+                roleStatus:
+                    type: integer
+                    description: 角色状态 1正常 2不正常
+                    format: int32
+                roleKey:
+                    type: string
+                    description: 角色主键
+                roleSort:
+                    type: integer
+                    description: 角色排序
+                    format: int64
+                roleRemark:
+                    type: string
+                    description: 角色备注
+                roleAdmin:
+                    type: boolean
+                    description: 是否是管理员
+                menuIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: uint64
+                    description: 菜单ID
+                deptIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+                    description: 部门ID
+            description: 编辑角色
+tags:
+    - name: Menu
+      description: Menu 菜单接口
+    - name: Pay
+    - name: Role
+      description: 角色管理
