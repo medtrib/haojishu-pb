@@ -4,9 +4,9 @@ package api.captcha.v1;
 
 import "google/api/annotations.proto";
 import "validate/validate.proto";
-option go_package = "common/api/captcha/v1;v1";
+option go_package = "github.com/medtrib/haojishu-pb/api/common/v1;v1";
 option java_multiple_files = true;
-option java_package = "api.captcha.v1";
+option java_package = "api.common.v1";
 
 service Captcha {
 	// 获取验证码

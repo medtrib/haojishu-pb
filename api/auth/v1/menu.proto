@@ -2,9 +2,9 @@ syntax = "proto3";
 package api.role.v1;
 
 import "google/api/annotations.proto";
-option go_package = "auth/api/role/v1;v1";
+option go_package = "github.com/medtrib/haojishu-pb/api/auth/v1;v1";
 option java_multiple_files = true;
-option java_package = "api.role.v1";
+option java_package = "api.auth.v1";
 
 // Menu 菜单接口
 service Menu {

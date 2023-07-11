@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package api.pay.v1;
 import "google/api/annotations.proto";
-option go_package = "unlimited/api/pay/v1;v1";
+option go_package = "github.com/medtrib/haojishu-pb/api/pay/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.pay.v1";
 
