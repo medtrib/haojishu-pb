@@ -1,5 +1,4 @@
-module github.com/medtrib/haojishu-api
-
+module github.com/medtrib/haojishu-pb
 
 go 1.18
 
