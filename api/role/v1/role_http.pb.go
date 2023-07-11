@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.6.2
 // - protoc             v3.19.4
-// source: authorization/v1/role.proto
+// source: role/v1/role.proto
 
 package v1
 
@@ -20,7 +20,6 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationRoleCheckAct = "/api.role.v1.Role/CheckAct"
 const OperationRoleCreateRole = "/api.role.v1.Role/CreateRole"
 const OperationRoleDeleteRole = "/api.role.v1.Role/DeleteRole"
 const OperationRoleGetRole = "/api.role.v1.Role/GetRole"
@@ -28,8 +27,6 @@ const OperationRoleListRole = "/api.role.v1.Role/ListRole"
 const OperationRoleUpdateRole = "/api.role.v1.Role/UpdateRole"
 
 type RoleHTTPServer interface {
-	// CheckAct 检查角色权限
-	CheckAct(context.Context, *CheckActRequest) (*CheckActReply, error)
 	// CreateRole 创建角色
 	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleReply, error)
 	// DeleteRole 删除角色
@@ -44,31 +41,11 @@ type RoleHTTPServer interface {
 
 func RegisterRoleHTTPServer(s *http.Server, srv RoleHTTPServer) {
 	r := s.Route("/")
-	r.POST("/authorization/role/v1/CheckAct", _Role_CheckAct0_HTTP_Handler(srv))
-	r.POST("/authorization/role/v1/CreateRole", _Role_CreateRole0_HTTP_Handler(srv))
-	r.POST("/authorization/role/v1/UpdateRole", _Role_UpdateRole0_HTTP_Handler(srv))
-	r.GET("/authorization/role/v1/DeleteRole", _Role_DeleteRole0_HTTP_Handler(srv))
-	r.GET("/authorization/role/v1/GetRole", _Role_GetRole0_HTTP_Handler(srv))
-	r.GET("/authorization/role/v1/ListRole", _Role_ListRole0_HTTP_Handler(srv))
-}
-
-func _Role_CheckAct0_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in CheckActRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationRoleCheckAct)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CheckAct(ctx, req.(*CheckActRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*CheckActReply)
-		return ctx.Result(200, reply)
-	}
+	r.POST("/admin/role/v1/CreateRole", _Role_CreateRole0_HTTP_Handler(srv))
+	r.POST("/admin/role/v1/UpdateRole", _Role_UpdateRole0_HTTP_Handler(srv))
+	r.GET("/admin/role/v1/DeleteRole", _Role_DeleteRole0_HTTP_Handler(srv))
+	r.GET("/admin/role/v1/GetRole", _Role_GetRole0_HTTP_Handler(srv))
+	r.GET("/admin/role/v1/ListRole", _Role_ListRole0_HTTP_Handler(srv))
 }
 
 func _Role_CreateRole0_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
@@ -167,7 +144,6 @@ func _Role_ListRole0_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) err
 }
 
 type RoleHTTPClient interface {
-	CheckAct(ctx context.Context, req *CheckActRequest, opts ...http.CallOption) (rsp *CheckActReply, err error)
 	CreateRole(ctx context.Context, req *CreateRoleRequest, opts ...http.CallOption) (rsp *CreateRoleReply, err error)
 	DeleteRole(ctx context.Context, req *DeleteRoleRequest, opts ...http.CallOption) (rsp *RoleReply, err error)
 	GetRole(ctx context.Context, req *GetRoleRequest, opts ...http.CallOption) (rsp *GetRoleReply, err error)
@@ -183,22 +159,9 @@ func NewRoleHTTPClient(client *http.Client) RoleHTTPClient {
 	return &RoleHTTPClientImpl{client}
 }
 
-func (c *RoleHTTPClientImpl) CheckAct(ctx context.Context, in *CheckActRequest, opts ...http.CallOption) (*CheckActReply, error) {
-	var out CheckActReply
-	pattern := "/authorization/role/v1/CheckAct"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationRoleCheckAct))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
 func (c *RoleHTTPClientImpl) CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...http.CallOption) (*CreateRoleReply, error) {
 	var out CreateRoleReply
-	pattern := "/authorization/role/v1/CreateRole"
+	pattern := "/admin/role/v1/CreateRole"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRoleCreateRole))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -211,7 +174,7 @@ func (c *RoleHTTPClientImpl) CreateRole(ctx context.Context, in *CreateRoleReque
 
 func (c *RoleHTTPClientImpl) DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...http.CallOption) (*RoleReply, error) {
 	var out RoleReply
-	pattern := "/authorization/role/v1/DeleteRole"
+	pattern := "/admin/role/v1/DeleteRole"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationRoleDeleteRole))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -224,7 +187,7 @@ func (c *RoleHTTPClientImpl) DeleteRole(ctx context.Context, in *DeleteRoleReque
 
 func (c *RoleHTTPClientImpl) GetRole(ctx context.Context, in *GetRoleRequest, opts ...http.CallOption) (*GetRoleReply, error) {
 	var out GetRoleReply
-	pattern := "/authorization/role/v1/GetRole"
+	pattern := "/admin/role/v1/GetRole"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationRoleGetRole))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -237,7 +200,7 @@ func (c *RoleHTTPClientImpl) GetRole(ctx context.Context, in *GetRoleRequest, op
 
 func (c *RoleHTTPClientImpl) ListRole(ctx context.Context, in *ListRoleRequest, opts ...http.CallOption) (*ListRoleReply, error) {
 	var out ListRoleReply
-	pattern := "/authorization/role/v1/ListRole"
+	pattern := "/admin/role/v1/ListRole"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationRoleListRole))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -250,7 +213,7 @@ func (c *RoleHTTPClientImpl) ListRole(ctx context.Context, in *ListRoleRequest, 
 
 func (c *RoleHTTPClientImpl) UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...http.CallOption) (*RoleReply, error) {
 	var out RoleReply
-	pattern := "/authorization/role/v1/UpdateRole"
+	pattern := "/admin/role/v1/UpdateRole"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRoleUpdateRole))
 	opts = append(opts, http.PathTemplate(pattern))

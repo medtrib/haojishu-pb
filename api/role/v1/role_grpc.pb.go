@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.19.4
-// source: authorization/v1/role.proto
+// source: role/v1/role.proto
 
 package v1
 
@@ -20,7 +20,6 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Role_CheckAct_FullMethodName   = "/api.role.v1.Role/CheckAct"
 	Role_CreateRole_FullMethodName = "/api.role.v1.Role/CreateRole"
 	Role_UpdateRole_FullMethodName = "/api.role.v1.Role/UpdateRole"
 	Role_DeleteRole_FullMethodName = "/api.role.v1.Role/DeleteRole"
@@ -32,8 +31,6 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RoleClient interface {
-	// 检查角色权限
-	CheckAct(ctx context.Context, in *CheckActRequest, opts ...grpc.CallOption) (*CheckActReply, error)
 	// 创建角色
 	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*CreateRoleReply, error)
 	// 编辑角色
@@ -52,15 +49,6 @@ type roleClient struct {
 
 func NewRoleClient(cc grpc.ClientConnInterface) RoleClient {
 	return &roleClient{cc}
-}
-
-func (c *roleClient) CheckAct(ctx context.Context, in *CheckActRequest, opts ...grpc.CallOption) (*CheckActReply, error) {
-	out := new(CheckActReply)
-	err := c.cc.Invoke(ctx, Role_CheckAct_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *roleClient) CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*CreateRoleReply, error) {
@@ -112,8 +100,6 @@ func (c *roleClient) ListRole(ctx context.Context, in *ListRoleRequest, opts ...
 // All implementations must embed UnimplementedRoleServer
 // for forward compatibility
 type RoleServer interface {
-	// 检查角色权限
-	CheckAct(context.Context, *CheckActRequest) (*CheckActReply, error)
 	// 创建角色
 	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleReply, error)
 	// 编辑角色
@@ -131,9 +117,6 @@ type RoleServer interface {
 type UnimplementedRoleServer struct {
 }
 
-func (UnimplementedRoleServer) CheckAct(context.Context, *CheckActRequest) (*CheckActReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckAct not implemented")
-}
 func (UnimplementedRoleServer) CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateRole not implemented")
 }
@@ -160,24 +143,6 @@ type UnsafeRoleServer interface {
 
 func RegisterRoleServer(s grpc.ServiceRegistrar, srv RoleServer) {
 	s.RegisterService(&Role_ServiceDesc, srv)
-}
-
-func _Role_CheckAct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CheckActRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoleServer).CheckAct(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Role_CheckAct_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServer).CheckAct(ctx, req.(*CheckActRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Role_CreateRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -278,10 +243,6 @@ var Role_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*RoleServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CheckAct",
-			Handler:    _Role_CheckAct_Handler,
-		},
-		{
 			MethodName: "CreateRole",
 			Handler:    _Role_CreateRole_Handler,
 		},
@@ -303,5 +264,5 @@ var Role_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "authorization/v1/role.proto",
+	Metadata: "role/v1/role.proto",
 }

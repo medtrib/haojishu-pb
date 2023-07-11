@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package api.upload.v1;
+import "google/api/annotations.proto";
+option go_package = "unlimited/api/upload/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.upload.v1";
+
+service QiNiu {
+	rpc UpToken  (UpTokenRequest) returns (UpTokenRequestReply){
+		option (google.api.http) = {
+			get: "/api/v1/UpToken",
+		};
+	};
+	rpc UploadFileBase  (UploadFileBaseRequest) returns (UploadFileBaseReply){
+		option (google.api.http) = {
+			post: "/api/v1/UploadFileBase",
+			body: "*",
+		};
+	};
+}
+
+message UpTokenRequest {}
+message UpTokenRequestReply {
+	string token = 1;
+}
+
+message UploadFileBaseRequest{
+	string file = 1;
+	string path = 2;
+}
+message UploadFileBaseReply {
+	string file = 1;
+}

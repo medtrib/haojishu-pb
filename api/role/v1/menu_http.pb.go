@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.6.2
 // - protoc             v3.19.4
-// source: authorization/v1/menu.proto
+// source: role/v1/menu.proto
 
 package v1
 
@@ -44,12 +44,12 @@ type MenuHTTPServer interface {
 
 func RegisterMenuHTTPServer(s *http.Server, srv MenuHTTPServer) {
 	r := s.Route("/")
-	r.POST("/authorization/menu/v1/CreateMenu", _Menu_CreateMenu0_HTTP_Handler(srv))
-	r.POST("/authorization/menu/v1/UpdateMenu", _Menu_UpdateMenu0_HTTP_Handler(srv))
-	r.GET("/authorization/menu/v1/DeleteMenu", _Menu_DeleteMenu0_HTTP_Handler(srv))
-	r.GET("/authorization/menu/v1/GetMenu", _Menu_GetMenu0_HTTP_Handler(srv))
-	r.GET("/authorization/menu/v1/ListMenu", _Menu_ListMenu0_HTTP_Handler(srv))
-	r.GET("/authorization/menu/v1/ListMenuTree", _Menu_ListMenuTree0_HTTP_Handler(srv))
+	r.POST("/admin/role/v1/CreateMenu", _Menu_CreateMenu0_HTTP_Handler(srv))
+	r.POST("/admin/role/v1/UpdateMenu", _Menu_UpdateMenu0_HTTP_Handler(srv))
+	r.GET("/admin/role/v1/DeleteMenu", _Menu_DeleteMenu0_HTTP_Handler(srv))
+	r.GET("/admin/role/v1/GetMenu", _Menu_GetMenu0_HTTP_Handler(srv))
+	r.GET("/admin/role/v1/ListMenu", _Menu_ListMenu0_HTTP_Handler(srv))
+	r.GET("/admin/role/v1/ListMenuTree", _Menu_ListMenuTree0_HTTP_Handler(srv))
 }
 
 func _Menu_CreateMenu0_HTTP_Handler(srv MenuHTTPServer) func(ctx http.Context) error {
@@ -185,7 +185,7 @@ func NewMenuHTTPClient(client *http.Client) MenuHTTPClient {
 
 func (c *MenuHTTPClientImpl) CreateMenu(ctx context.Context, in *CreateMenuRequest, opts ...http.CallOption) (*MenuReply, error) {
 	var out MenuReply
-	pattern := "/authorization/menu/v1/CreateMenu"
+	pattern := "/admin/role/v1/CreateMenu"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationMenuCreateMenu))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -198,7 +198,7 @@ func (c *MenuHTTPClientImpl) CreateMenu(ctx context.Context, in *CreateMenuReque
 
 func (c *MenuHTTPClientImpl) DeleteMenu(ctx context.Context, in *DeleteMenuRequest, opts ...http.CallOption) (*MenuReply, error) {
 	var out MenuReply
-	pattern := "/authorization/menu/v1/DeleteMenu"
+	pattern := "/admin/role/v1/DeleteMenu"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationMenuDeleteMenu))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -211,7 +211,7 @@ func (c *MenuHTTPClientImpl) DeleteMenu(ctx context.Context, in *DeleteMenuReque
 
 func (c *MenuHTTPClientImpl) GetMenu(ctx context.Context, in *GetMenuRequest, opts ...http.CallOption) (*GetMenuReply, error) {
 	var out GetMenuReply
-	pattern := "/authorization/menu/v1/GetMenu"
+	pattern := "/admin/role/v1/GetMenu"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationMenuGetMenu))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -224,7 +224,7 @@ func (c *MenuHTTPClientImpl) GetMenu(ctx context.Context, in *GetMenuRequest, op
 
 func (c *MenuHTTPClientImpl) ListMenu(ctx context.Context, in *GetMenuRequest, opts ...http.CallOption) (*ListMenuReply, error) {
 	var out ListMenuReply
-	pattern := "/authorization/menu/v1/ListMenu"
+	pattern := "/admin/role/v1/ListMenu"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationMenuListMenu))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -237,7 +237,7 @@ func (c *MenuHTTPClientImpl) ListMenu(ctx context.Context, in *GetMenuRequest, o
 
 func (c *MenuHTTPClientImpl) ListMenuTree(ctx context.Context, in *GetMenuRequest, opts ...http.CallOption) (*ListMenuReply, error) {
 	var out ListMenuReply
-	pattern := "/authorization/menu/v1/ListMenuTree"
+	pattern := "/admin/role/v1/ListMenuTree"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationMenuListMenuTree))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -250,7 +250,7 @@ func (c *MenuHTTPClientImpl) ListMenuTree(ctx context.Context, in *GetMenuReques
 
 func (c *MenuHTTPClientImpl) UpdateMenu(ctx context.Context, in *UpdateMenuRequest, opts ...http.CallOption) (*MenuReply, error) {
 	var out MenuReply
-	pattern := "/authorization/menu/v1/UpdateMenu"
+	pattern := "/admin/role/v1/UpdateMenu"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationMenuUpdateMenu))
 	opts = append(opts, http.PathTemplate(pattern))

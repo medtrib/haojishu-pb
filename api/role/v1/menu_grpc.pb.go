@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.19.4
-// source: authorization/v1/menu.proto
+// source: role/v1/menu.proto
 
 package v1
 
@@ -303,5 +303,5 @@ var Menu_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "authorization/v1/menu.proto",
+	Metadata: "role/v1/menu.proto",
 }

@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package api.user.v1;
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+option go_package = "user/api/user/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.v1";
+
+service User {
+	// 用户注册
+	rpc CreateUser (CreateUserRequest) returns (CreateUserReply){
+		option (google.api.http) = {
+			post: "/admin/user/v1/reg",
+			body: "*"
+		};
+	};
+
+	// 用户登录
+	rpc UserLogin (UserLoginRequest) returns (UserLoginReply){
+		option(google.api.http) = {
+			post: "/admin/user/v1/login",
+			body: "*"
+		};
+	};
+
+	// 用户找回或修改密码
+	rpc UserFindOrModifyPasswd (UserFindOrModifyPasswdRequest) returns (UserFindOrModifyPasswdReply){
+		option(google.api.http) = {
+			post: "/admin/user/v1/FindOrModifyPasswd",
+			body: "*"
+		};
+	};
+
+	// 用户修改密码
+	rpc UserModifyPasswd (UserModifyPasswdRequest) returns (UserReply){
+		option(google.api.http) = {
+			post: "/admin/user/v1/UserModifyPasswd",
+			body: "*"
+		};
+	};
+
+	// 用户刷新Token
+	rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenReply){
+		option(google.api.http) = {
+			get: "/admin/user/v1/RefreshToken",
+		};
+	}
+}
+
+// CreateUserRequest 创建用户
+message CreateUserRequest {
+	// 邮箱
+	string Email = 1 [(validate.rules).string.email = true];
+	// 密码
+	string Passwd = 2 [(validate.rules).string.min_len = 8, (validate.rules).string.max_len = 20];
+	// 电话
+	string Phone = 4;
+	// IP
+	string LastIp = 5 [(validate.rules).string.ip = true];
+	// 客户端头部
+	string AcceptLanguage = 6 [(validate.rules).string.ignore_empty = false];
+}
+// CreateUserReply 创建用户返回
+message CreateUserReply {
+	// 邮箱
+	string Email = 1;
+	// 所属国家
+	string Country =3;
+	// 电话
+	string Phone = 4;
+	// token
+	string Token = 5;
+	// 过期时间
+	string ExpiresAt = 6;
+}
+
+// UserLoginRequest 用户登录
+message UserLoginRequest {
+	// 邮箱
+	string Email = 1 [(validate.rules).string.email = true];
+	// 密码
+	string Passwd = 2 [(validate.rules).string.min_len = 8, (validate.rules).string.max_len = 20];
+	// IP
+	string LastIp = 5 [(validate.rules).string.ip = true];
+	// 客户端头部
+	string AcceptLanguage = 6 [(validate.rules).string.ignore_empty = false];
+}
+// UserLoginReply 用户登录回复
+message UserLoginReply {
+	// 邮箱
+	string Email = 1;
+	// 所属国家
+	string Country =3;
+	// 电话
+	string Phone = 4;
+	// Token
+	string Token = 5;
+	// 过期时间
+	string ExpiresAt = 6;
+}
+
+// UserFindOrModifyPasswdRequest 用户找回或修改密码
+message UserFindOrModifyPasswdRequest{
+	string Email = 1;
+	// IP
+	string LastIp = 2 [(validate.rules).string.ip = true];
+	// 客户端头部
+	string AcceptLanguage = 3 [(validate.rules).string.ignore_empty = false];
+	// 验证码ID
+	string CaptchaId = 4 [(validate.rules).string.ignore_empty = false];
+	// 回答
+	string Answer = 5 [(validate.rules).string.ignore_empty = false];
+}
+// UserFindOrModifyPasswdReply 用户找回或修改密码返回
+message UserFindOrModifyPasswdReply{
+	bool Status = 1;
+	string Url = 2;
+	string urlStr = 3;
+}
+
+// UserModifyPasswdRequest 修改密码
+message UserModifyPasswdRequest {
+	// 邮箱
+	string Email = 1 [(validate.rules).string.email = true];
+	// 找回密码返回KEY
+	string Code = 2;
+	// IP
+	string LastIp = 3 [(validate.rules).string.ip = true];
+	// 密码
+	string Passwd = 4 [(validate.rules).string.min_len = 8, (validate.rules).string.max_len = 20];
+	// 客户端头部
+	string AcceptLanguage = 5 [(validate.rules).string.ignore_empty = false];
+}
+
+// UserModifyPasswdReply 修改密码返回
+message UserReply {
+	bool Status = 1;
+}
+
+message RefreshTokenRequest{
+
+}
+
+message RefreshTokenReply{
+	// token
+	string Token = 1;
+	// 过期时间
+	string ExpiresAt = 2;
+}

@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package api.project.v1;
+import "google/api/annotations.proto";
+option go_package = "unlimited/api/project/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.project.v1";
+
+service Brand {
+	rpc CreateBrand (CreateBrandRequest) returns (CreateBrandReply){
+		option(google.api.http) = {
+			post: "/brand/v1/CreateBrand",
+			body: "*"
+		};
+	};
+	rpc UpdateBrand (UpdateBrandRequest) returns (UpdateBrandReply){
+		option(google.api.http) = {
+			post: "/brand/v1/UpdateBrand",
+			body: "*"
+		};
+	};
+	rpc DeleteBrand (DeleteBrandRequest) returns (DeleteBrandReply){
+		option(google.api.http) = {
+			get: "/brand/v1/DeleteBrand/{id}",
+		};
+	};
+	rpc GetBrand (GetBrandRequest) returns (GetBrandReply){
+		option(google.api.http) = {
+			get: "/brand/v1/GetBrand/{id}",
+		};
+	};
+	rpc ListBrand (ListBrandRequest) returns (ListBrandReply){
+		option(google.api.http) = {
+			get: "/brand/v1/ListBrand",
+		};
+	};
+}
+
+// 创建品牌
+message CreateBrandRequest {
+	string projectBrandName = 1;
+	string projectBrandFirstLetter = 2;
+	uint32 projectBrandSort = 3;
+	uint32 projectBrandFactoryStatus = 4;
+	uint32 projectBrandShowStatus = 5;
+	string projectBrandLogo = 6;
+	string projectBrandBigPic = 7;
+	string projectBrandBrandInfo = 8;
+}
+message CreateBrandReply {}
+
+message UpdateBrandRequest {}
+message UpdateBrandReply {}
+
+message DeleteBrandRequest {
+	string id = 1;
+}
+message DeleteBrandReply {}
+
+message GetBrandRequest {
+	string id = 1;
+}
+message GetBrandReply {}
+
+message ListBrandRequest {}
+message ListBrandReply {}
