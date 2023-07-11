@@ -2,13 +2,12 @@
 // versions:
 // - protoc-gen-go-http v2.6.2
 // - protoc             v3.19.4
-// source: authorization/v1/role.proto
+// source: auth/v1/role.proto
 
 package v1
 
 import (
 	context "context"
-
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
 )
@@ -44,12 +43,12 @@ type RoleHTTPServer interface {
 
 func RegisterRoleHTTPServer(s *http.Server, srv RoleHTTPServer) {
 	r := s.Route("/")
-	r.POST("/authorization/role/v1/CheckAct", _Role_CheckAct0_HTTP_Handler(srv))
-	r.POST("/authorization/role/v1/CreateRole", _Role_CreateRole0_HTTP_Handler(srv))
-	r.POST("/authorization/role/v1/UpdateRole", _Role_UpdateRole0_HTTP_Handler(srv))
-	r.GET("/authorization/role/v1/DeleteRole", _Role_DeleteRole0_HTTP_Handler(srv))
-	r.GET("/authorization/role/v1/GetRole", _Role_GetRole0_HTTP_Handler(srv))
-	r.GET("/authorization/role/v1/ListRole", _Role_ListRole0_HTTP_Handler(srv))
+	r.POST("/auth/role/v1/CheckAct", _Role_CheckAct0_HTTP_Handler(srv))
+	r.POST("/auth/role/v1/CreateRole", _Role_CreateRole0_HTTP_Handler(srv))
+	r.POST("/auth/role/v1/UpdateRole", _Role_UpdateRole0_HTTP_Handler(srv))
+	r.GET("/auth/role/v1/DeleteRole", _Role_DeleteRole0_HTTP_Handler(srv))
+	r.GET("/auth/role/v1/GetRole", _Role_GetRole0_HTTP_Handler(srv))
+	r.GET("/auth/role/v1/ListRole", _Role_ListRole0_HTTP_Handler(srv))
 }
 
 func _Role_CheckAct0_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
@@ -185,7 +184,7 @@ func NewRoleHTTPClient(client *http.Client) RoleHTTPClient {
 
 func (c *RoleHTTPClientImpl) CheckAct(ctx context.Context, in *CheckActRequest, opts ...http.CallOption) (*CheckActReply, error) {
 	var out CheckActReply
-	pattern := "/authorization/role/v1/CheckAct"
+	pattern := "/auth/role/v1/CheckAct"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRoleCheckAct))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -198,7 +197,7 @@ func (c *RoleHTTPClientImpl) CheckAct(ctx context.Context, in *CheckActRequest, 
 
 func (c *RoleHTTPClientImpl) CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...http.CallOption) (*CreateRoleReply, error) {
 	var out CreateRoleReply
-	pattern := "/authorization/role/v1/CreateRole"
+	pattern := "/auth/role/v1/CreateRole"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRoleCreateRole))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -211,7 +210,7 @@ func (c *RoleHTTPClientImpl) CreateRole(ctx context.Context, in *CreateRoleReque
 
 func (c *RoleHTTPClientImpl) DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...http.CallOption) (*RoleReply, error) {
 	var out RoleReply
-	pattern := "/authorization/role/v1/DeleteRole"
+	pattern := "/auth/role/v1/DeleteRole"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationRoleDeleteRole))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -224,7 +223,7 @@ func (c *RoleHTTPClientImpl) DeleteRole(ctx context.Context, in *DeleteRoleReque
 
 func (c *RoleHTTPClientImpl) GetRole(ctx context.Context, in *GetRoleRequest, opts ...http.CallOption) (*GetRoleReply, error) {
 	var out GetRoleReply
-	pattern := "/authorization/role/v1/GetRole"
+	pattern := "/auth/role/v1/GetRole"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationRoleGetRole))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -237,7 +236,7 @@ func (c *RoleHTTPClientImpl) GetRole(ctx context.Context, in *GetRoleRequest, op
 
 func (c *RoleHTTPClientImpl) ListRole(ctx context.Context, in *ListRoleRequest, opts ...http.CallOption) (*ListRoleReply, error) {
 	var out ListRoleReply
-	pattern := "/authorization/role/v1/ListRole"
+	pattern := "/auth/role/v1/ListRole"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationRoleListRole))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -250,7 +249,7 @@ func (c *RoleHTTPClientImpl) ListRole(ctx context.Context, in *ListRoleRequest, 
 
 func (c *RoleHTTPClientImpl) UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...http.CallOption) (*RoleReply, error) {
 	var out RoleReply
-	pattern := "/authorization/role/v1/UpdateRole"
+	pattern := "/auth/role/v1/UpdateRole"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRoleUpdateRole))
 	opts = append(opts, http.PathTemplate(pattern))

@@ -2,7 +2,7 @@ syntax = "proto3";
 package api.role.v1;
 
 import "google/api/annotations.proto";
-option go_package = "unlimited/api/role/v1;v1";
+option go_package = "auth/api/role/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.role.v1";
 
@@ -11,7 +11,7 @@ service Menu {
 	// CreateMenu 创建菜单
 	rpc CreateMenu (CreateMenuRequest) returns (MenuReply){
 		option(google.api.http) = {
-			post: "/authorization/menu/v1/CreateMenu",
+			post: "/auth/menu/v1/CreateMenu",
 			body: "*"
 		};
 	};
@@ -19,7 +19,7 @@ service Menu {
 	// UpdateMenu 编辑菜单
 	rpc UpdateMenu (UpdateMenuRequest) returns (MenuReply){
 		option(google.api.http) = {
-			post: "/authorization/menu/v1/UpdateMenu",
+			post: "/auth/menu/v1/UpdateMenu",
 			body: "*"
 		};
 	};
@@ -27,21 +27,21 @@ service Menu {
 	// DeleteMenu 删除菜单
 	rpc DeleteMenu (DeleteMenuRequest) returns (MenuReply){
 		option(google.api.http) = {
-			get: "/authorization/menu/v1/DeleteMenu",
+			get: "/auth/menu/v1/DeleteMenu",
 		};
 	};
 
 	// GetMenu 查询单挑菜单信息
 	rpc GetMenu (GetMenuRequest) returns (GetMenuReply){
 		option(google.api.http) = {
-			get: "/authorization/menu/v1/GetMenu",
+			get: "/auth/menu/v1/GetMenu",
 		};
 	};
 
 	// ListMenu 获取菜单列表
 	rpc ListMenu (GetMenuRequest) returns (ListMenuReply){
 		option(google.api.http) = {
-			get: "/authorization/menu/v1/ListMenu",
+			get: "/auth/menu/v1/ListMenu",
 		};
 	};
 
@@ -49,7 +49,7 @@ service Menu {
 	// ListMenuTree 获取树形列表
 	rpc ListMenuTree (GetMenuRequest) returns (ListMenuReply){
 		option(google.api.http) = {
-			get: "/authorization/menu/v1/ListMenuTree",
+			get: "/auth/menu/v1/ListMenuTree",
 		};
 	};
 }

@@ -9,7 +9,7 @@ option java_package = "api.pay.v1";
 service Pay {
 	rpc CreatePay (CreatePayRequest) returns (CreatePayReply){
 		option(google.api.http) = {
-			post: "/pay/v1/CreatePay",
+			post: "/common/pay/v1/CreatePay",
 			body: "*"
 		};
 	};

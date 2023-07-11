@@ -2,13 +2,12 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.19.4
-// source: authorization/v1/role.proto
+// source: auth/v1/role.proto
 
 package v1
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -303,5 +302,5 @@ var Role_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "authorization/v1/role.proto",
+	Metadata: "auth/v1/role.proto",
 }

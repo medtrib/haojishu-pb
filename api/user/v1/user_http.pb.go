@@ -8,7 +8,6 @@ package v1
 
 import (
 	context "context"
-
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
 )
@@ -41,11 +40,11 @@ type UserHTTPServer interface {
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
-	r.POST("/admin/user/v1/reg", _User_CreateUser0_HTTP_Handler(srv))
-	r.POST("/admin/user/v1/login", _User_UserLogin0_HTTP_Handler(srv))
-	r.POST("/admin/user/v1/FindOrModifyPasswd", _User_UserFindOrModifyPasswd0_HTTP_Handler(srv))
-	r.POST("/admin/user/v1/UserModifyPasswd", _User_UserModifyPasswd0_HTTP_Handler(srv))
-	r.GET("/admin/user/v1/RefreshToken", _User_RefreshToken0_HTTP_Handler(srv))
+	r.POST("/user/user/v1/reg", _User_CreateUser0_HTTP_Handler(srv))
+	r.POST("/user/user/v1/login", _User_UserLogin0_HTTP_Handler(srv))
+	r.POST("/user/user/v1/FindOrModifyPasswd", _User_UserFindOrModifyPasswd0_HTTP_Handler(srv))
+	r.POST("/user/user/v1/UserModifyPasswd", _User_UserModifyPasswd0_HTTP_Handler(srv))
+	r.GET("/user/user/v1/RefreshToken", _User_RefreshToken0_HTTP_Handler(srv))
 }
 
 func _User_CreateUser0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -161,7 +160,7 @@ func NewUserHTTPClient(client *http.Client) UserHTTPClient {
 
 func (c *UserHTTPClientImpl) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...http.CallOption) (*CreateUserReply, error) {
 	var out CreateUserReply
-	pattern := "/admin/user/v1/reg"
+	pattern := "/user/user/v1/reg"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserCreateUser))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -174,7 +173,7 @@ func (c *UserHTTPClientImpl) CreateUser(ctx context.Context, in *CreateUserReque
 
 func (c *UserHTTPClientImpl) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...http.CallOption) (*RefreshTokenReply, error) {
 	var out RefreshTokenReply
-	pattern := "/admin/user/v1/RefreshToken"
+	pattern := "/user/user/v1/RefreshToken"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationUserRefreshToken))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -187,7 +186,7 @@ func (c *UserHTTPClientImpl) RefreshToken(ctx context.Context, in *RefreshTokenR
 
 func (c *UserHTTPClientImpl) UserFindOrModifyPasswd(ctx context.Context, in *UserFindOrModifyPasswdRequest, opts ...http.CallOption) (*UserFindOrModifyPasswdReply, error) {
 	var out UserFindOrModifyPasswdReply
-	pattern := "/admin/user/v1/FindOrModifyPasswd"
+	pattern := "/user/user/v1/FindOrModifyPasswd"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserUserFindOrModifyPasswd))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -200,7 +199,7 @@ func (c *UserHTTPClientImpl) UserFindOrModifyPasswd(ctx context.Context, in *Use
 
 func (c *UserHTTPClientImpl) UserLogin(ctx context.Context, in *UserLoginRequest, opts ...http.CallOption) (*UserLoginReply, error) {
 	var out UserLoginReply
-	pattern := "/admin/user/v1/login"
+	pattern := "/user/user/v1/login"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserUserLogin))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -213,7 +212,7 @@ func (c *UserHTTPClientImpl) UserLogin(ctx context.Context, in *UserLoginRequest
 
 func (c *UserHTTPClientImpl) UserModifyPasswd(ctx context.Context, in *UserModifyPasswdRequest, opts ...http.CallOption) (*UserReply, error) {
 	var out UserReply
-	pattern := "/admin/user/v1/UserModifyPasswd"
+	pattern := "/user/user/v1/UserModifyPasswd"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserUserModifyPasswd))
 	opts = append(opts, http.PathTemplate(pattern))

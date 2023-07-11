@@ -3,7 +3,7 @@ syntax = "proto3";
 package api.role.v1;
 import "google/api/annotations.proto";
 import "validate/validate.proto";
-option go_package = "unlimited/api/role/v1;v1";
+option go_package = "auth/api/role/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.role.v1";
 // 角色管理
@@ -11,40 +11,40 @@ service Role {
 	// 检查角色权限
 	rpc CheckAct (CheckActRequest) returns (CheckActReply){
 		option(google.api.http) = {
-			post: "/authorization/role/v1/CheckAct",
+			post: "/auth/role/v1/CheckAct",
 			body: "*"
 		};
 	}
 	// 创建角色
 	rpc CreateRole (CreateRoleRequest) returns (CreateRoleReply){
 		option(google.api.http) = {
-			post: "/authorization/role/v1/CreateRole",
+			post: "/auth/role/v1/CreateRole",
 			body: "*"
 		};
 	};
 	// 编辑角色
 	rpc UpdateRole (UpdateRoleRequest) returns (RoleReply){
 		option(google.api.http) = {
-			post: "/authorization/role/v1/UpdateRole",
+			post: "/auth/role/v1/UpdateRole",
 			body: "*"
 		};
 	};
 	// 删除角色
 	rpc DeleteRole (DeleteRoleRequest) returns (RoleReply){
 		option(google.api.http) = {
-			get: "/authorization/role/v1/DeleteRole",
+			get: "/auth/role/v1/DeleteRole",
 		};
 	};
 	// 获取角色
 	rpc GetRole (GetRoleRequest) returns (GetRoleReply){
 		option(google.api.http) = {
-			get: "/authorization/role/v1/GetRole",
+			get: "/auth/role/v1/GetRole",
 		};
 	};
 	// 获取角色列表
 	rpc ListRole (ListRoleRequest) returns (ListRoleReply){
 		option(google.api.http) = {
-			get: "/authorization/role/v1/ListRole",
+			get: "/auth/role/v1/ListRole",
 		};
 	};
 }

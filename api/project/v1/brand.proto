@@ -9,29 +9,29 @@ option java_package = "api.project.v1";
 service Brand {
 	rpc CreateBrand (CreateBrandRequest) returns (CreateBrandReply){
 		option(google.api.http) = {
-			post: "/brand/v1/CreateBrand",
+			post: "/project/brand/v1/CreateBrand",
 			body: "*"
 		};
 	};
 	rpc UpdateBrand (UpdateBrandRequest) returns (UpdateBrandReply){
 		option(google.api.http) = {
-			post: "/brand/v1/UpdateBrand",
+			post: "/project/brand/v1/UpdateBrand",
 			body: "*"
 		};
 	};
 	rpc DeleteBrand (DeleteBrandRequest) returns (DeleteBrandReply){
 		option(google.api.http) = {
-			get: "/brand/v1/DeleteBrand/{id}",
+			get: "/project/brand/v1/DeleteBrand/{id}",
 		};
 	};
 	rpc GetBrand (GetBrandRequest) returns (GetBrandReply){
 		option(google.api.http) = {
-			get: "/brand/v1/GetBrand/{id}",
+			get: "/project/brand/v1/GetBrand/{id}",
 		};
 	};
 	rpc ListBrand (ListBrandRequest) returns (ListBrandReply){
 		option(google.api.http) = {
-			get: "/brand/v1/ListBrand",
+			get: "/project/brand/v1/ListBrand",
 		};
 	};
 }

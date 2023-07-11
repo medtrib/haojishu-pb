@@ -8,7 +8,6 @@ package v1
 
 import (
 	context "context"
-
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
 )
@@ -36,11 +35,11 @@ type BrandHTTPServer interface {
 
 func RegisterBrandHTTPServer(s *http.Server, srv BrandHTTPServer) {
 	r := s.Route("/")
-	r.POST("/brand/v1/CreateBrand", _Brand_CreateBrand0_HTTP_Handler(srv))
-	r.POST("/brand/v1/UpdateBrand", _Brand_UpdateBrand0_HTTP_Handler(srv))
-	r.GET("/brand/v1/DeleteBrand/{id}", _Brand_DeleteBrand0_HTTP_Handler(srv))
-	r.GET("/brand/v1/GetBrand/{id}", _Brand_GetBrand0_HTTP_Handler(srv))
-	r.GET("/brand/v1/ListBrand", _Brand_ListBrand0_HTTP_Handler(srv))
+	r.POST("/project/brand/v1/CreateBrand", _Brand_CreateBrand0_HTTP_Handler(srv))
+	r.POST("/project/brand/v1/UpdateBrand", _Brand_UpdateBrand0_HTTP_Handler(srv))
+	r.GET("/project/brand/v1/DeleteBrand/{id}", _Brand_DeleteBrand0_HTTP_Handler(srv))
+	r.GET("/project/brand/v1/GetBrand/{id}", _Brand_GetBrand0_HTTP_Handler(srv))
+	r.GET("/project/brand/v1/ListBrand", _Brand_ListBrand0_HTTP_Handler(srv))
 }
 
 func _Brand_CreateBrand0_HTTP_Handler(srv BrandHTTPServer) func(ctx http.Context) error {
@@ -162,7 +161,7 @@ func NewBrandHTTPClient(client *http.Client) BrandHTTPClient {
 
 func (c *BrandHTTPClientImpl) CreateBrand(ctx context.Context, in *CreateBrandRequest, opts ...http.CallOption) (*CreateBrandReply, error) {
 	var out CreateBrandReply
-	pattern := "/brand/v1/CreateBrand"
+	pattern := "/project/brand/v1/CreateBrand"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBrandCreateBrand))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -175,7 +174,7 @@ func (c *BrandHTTPClientImpl) CreateBrand(ctx context.Context, in *CreateBrandRe
 
 func (c *BrandHTTPClientImpl) DeleteBrand(ctx context.Context, in *DeleteBrandRequest, opts ...http.CallOption) (*DeleteBrandReply, error) {
 	var out DeleteBrandReply
-	pattern := "/brand/v1/DeleteBrand/{id}"
+	pattern := "/project/brand/v1/DeleteBrand/{id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationBrandDeleteBrand))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -188,7 +187,7 @@ func (c *BrandHTTPClientImpl) DeleteBrand(ctx context.Context, in *DeleteBrandRe
 
 func (c *BrandHTTPClientImpl) GetBrand(ctx context.Context, in *GetBrandRequest, opts ...http.CallOption) (*GetBrandReply, error) {
 	var out GetBrandReply
-	pattern := "/brand/v1/GetBrand/{id}"
+	pattern := "/project/brand/v1/GetBrand/{id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationBrandGetBrand))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -201,7 +200,7 @@ func (c *BrandHTTPClientImpl) GetBrand(ctx context.Context, in *GetBrandRequest,
 
 func (c *BrandHTTPClientImpl) ListBrand(ctx context.Context, in *ListBrandRequest, opts ...http.CallOption) (*ListBrandReply, error) {
 	var out ListBrandReply
-	pattern := "/brand/v1/ListBrand"
+	pattern := "/project/brand/v1/ListBrand"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationBrandListBrand))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -214,7 +213,7 @@ func (c *BrandHTTPClientImpl) ListBrand(ctx context.Context, in *ListBrandReques
 
 func (c *BrandHTTPClientImpl) UpdateBrand(ctx context.Context, in *UpdateBrandRequest, opts ...http.CallOption) (*UpdateBrandReply, error) {
 	var out UpdateBrandReply
-	pattern := "/brand/v1/UpdateBrand"
+	pattern := "/project/brand/v1/UpdateBrand"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBrandUpdateBrand))
 	opts = append(opts, http.PathTemplate(pattern))

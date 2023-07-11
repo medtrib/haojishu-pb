@@ -12,7 +12,7 @@ service User {
 	// 用户注册
 	rpc CreateUser (CreateUserRequest) returns (CreateUserReply){
 		option (google.api.http) = {
-			post: "/admin/user/v1/reg",
+			post: "/user/user/v1/reg",
 			body: "*"
 		};
 	};
@@ -20,7 +20,7 @@ service User {
 	// 用户登录
 	rpc UserLogin (UserLoginRequest) returns (UserLoginReply){
 		option(google.api.http) = {
-			post: "/admin/user/v1/login",
+			post: "/user/user/v1/login",
 			body: "*"
 		};
 	};
@@ -28,7 +28,7 @@ service User {
 	// 用户找回或修改密码
 	rpc UserFindOrModifyPasswd (UserFindOrModifyPasswdRequest) returns (UserFindOrModifyPasswdReply){
 		option(google.api.http) = {
-			post: "/admin/user/v1/FindOrModifyPasswd",
+			post: "/user/user/v1/FindOrModifyPasswd",
 			body: "*"
 		};
 	};
@@ -36,7 +36,7 @@ service User {
 	// 用户修改密码
 	rpc UserModifyPasswd (UserModifyPasswdRequest) returns (UserReply){
 		option(google.api.http) = {
-			post: "/admin/user/v1/UserModifyPasswd",
+			post: "/user/user/v1/UserModifyPasswd",
 			body: "*"
 		};
 	};
@@ -44,7 +44,7 @@ service User {
 	// 用户刷新Token
 	rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenReply){
 		option(google.api.http) = {
-			get: "/admin/user/v1/RefreshToken",
+			get: "/user/user/v1/RefreshToken",
 		};
 	}
 }

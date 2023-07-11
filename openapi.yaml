@@ -6,7 +6,7 @@ info:
     title: ""
     version: 0.0.1
 paths:
-    /authorization/menu/v1/CreateMenu:
+    /auth/menu/v1/CreateMenu:
         post:
             tags:
                 - Menu
@@ -25,7 +25,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.MenuReply'
-    /authorization/menu/v1/DeleteMenu:
+    /auth/menu/v1/DeleteMenu:
         get:
             tags:
                 - Menu
@@ -43,7 +43,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.MenuReply'
-    /authorization/menu/v1/GetMenu:
+    /auth/menu/v1/GetMenu:
         get:
             tags:
                 - Menu
@@ -62,7 +62,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.GetMenuReply'
-    /authorization/menu/v1/ListMenu:
+    /auth/menu/v1/ListMenu:
         get:
             tags:
                 - Menu
@@ -81,7 +81,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.ListMenuReply'
-    /authorization/menu/v1/ListMenuTree:
+    /auth/menu/v1/ListMenuTree:
         get:
             tags:
                 - Menu
@@ -100,7 +100,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.ListMenuReply'
-    /authorization/menu/v1/UpdateMenu:
+    /auth/menu/v1/UpdateMenu:
         post:
             tags:
                 - Menu
@@ -119,7 +119,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.MenuReply'
-    /authorization/role/v1/CheckAct:
+    /auth/role/v1/CheckAct:
         post:
             tags:
                 - Role
@@ -138,7 +138,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.CheckActReply'
-    /authorization/role/v1/CreateRole:
+    /auth/role/v1/CreateRole:
         post:
             tags:
                 - Role
@@ -157,7 +157,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.CreateRoleReply'
-    /authorization/role/v1/DeleteRole:
+    /auth/role/v1/DeleteRole:
         get:
             tags:
                 - Role
@@ -175,7 +175,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.RoleReply'
-    /authorization/role/v1/GetRole:
+    /auth/role/v1/GetRole:
         get:
             tags:
                 - Role
@@ -194,7 +194,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.GetRoleReply'
-    /authorization/role/v1/ListRole:
+    /auth/role/v1/ListRole:
         get:
             tags:
                 - Role
@@ -207,7 +207,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.ListRoleReply'
-    /authorization/role/v1/UpdateRole:
+    /auth/role/v1/UpdateRole:
         post:
             tags:
                 - Role
@@ -226,7 +226,75 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.role.v1.RoleReply'
-    /pay/v1/CreatePay:
+    /common/captcha/v1/getCaptcha:
+        get:
+            tags:
+                - Captcha
+            description: 获取验证码
+            operationId: Captcha_GetCaptcha
+            parameters:
+                - name: Email
+                  in: query
+                  description: 邮箱
+                  schema:
+                    type: string
+                - name: LastIp
+                  in: query
+                  description: IP
+                  schema:
+                    type: string
+                - name: AcceptLanguage
+                  in: query
+                  description: 客户端头部
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.captcha.v1.GetCaptchaReply'
+    /common/captcha/v1/verifyCaptcha:
+        get:
+            tags:
+                - Captcha
+            description: 验证验证码
+            operationId: Captcha_VerifyCaptcha
+            parameters:
+                - name: Email
+                  in: query
+                  description: 邮箱
+                  schema:
+                    type: string
+                - name: CaptchaId
+                  in: query
+                  description: 验证码ID
+                  schema:
+                    type: string
+                - name: Answer
+                  in: query
+                  description: 回答
+                  schema:
+                    type: string
+                - name: LastIp
+                  in: query
+                  description: IP
+                  schema:
+                    type: string
+                - name: AcceptLanguage
+                  in: query
+                  description: 客户端头部
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.captcha.v1.VerifyCaptchaReply'
+    /common/pay/v1/CreatePay:
         post:
             tags:
                 - Pay
@@ -244,8 +312,251 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.pay.v1.CreatePayReply'
+    /common/qiniu/UploadFileBase:
+        post:
+            tags:
+                - QiNiu
+            operationId: QiNiu_UploadFileBase
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.upload.v1.UploadFileBaseRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.upload.v1.UploadFileBaseReply'
+    /common/qiniu/v1/UpToken:
+        get:
+            tags:
+                - QiNiu
+            operationId: QiNiu_UpToken
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.upload.v1.UpTokenRequestReply'
+    /common/query/v1/GetCountryIso:
+        get:
+            tags:
+                - Query
+            description: 获取国家IOS
+            operationId: Query_GetCountryIso
+            parameters:
+                - name: ip
+                  in: query
+                  description: IP
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.captcha.v1.GetCountryIsoReply'
+    /project/brand/v1/CreateBrand:
+        post:
+            tags:
+                - Brand
+            operationId: Brand_CreateBrand
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.project.v1.CreateBrandRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.project.v1.CreateBrandReply'
+    /project/brand/v1/DeleteBrand/{id}:
+        get:
+            tags:
+                - Brand
+            operationId: Brand_DeleteBrand
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.project.v1.DeleteBrandReply'
+    /project/brand/v1/GetBrand/{id}:
+        get:
+            tags:
+                - Brand
+            operationId: Brand_GetBrand
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.project.v1.GetBrandReply'
+    /project/brand/v1/ListBrand:
+        get:
+            tags:
+                - Brand
+            operationId: Brand_ListBrand
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.project.v1.ListBrandReply'
+    /project/brand/v1/UpdateBrand:
+        post:
+            tags:
+                - Brand
+            operationId: Brand_UpdateBrand
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.project.v1.UpdateBrandRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.project.v1.UpdateBrandReply'
+    /user/user/v1/FindOrModifyPasswd:
+        post:
+            tags:
+                - User
+            description: 用户找回或修改密码
+            operationId: User_UserFindOrModifyPasswd
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.v1.UserFindOrModifyPasswdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.v1.UserFindOrModifyPasswdReply'
+    /user/user/v1/RefreshToken:
+        get:
+            tags:
+                - User
+            description: 用户刷新Token
+            operationId: User_RefreshToken
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.v1.RefreshTokenReply'
+    /user/user/v1/UserModifyPasswd:
+        post:
+            tags:
+                - User
+            description: 用户修改密码
+            operationId: User_UserModifyPasswd
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.v1.UserModifyPasswdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.v1.UserReply'
+    /user/user/v1/login:
+        post:
+            tags:
+                - User
+            description: 用户登录
+            operationId: User_UserLogin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.v1.UserLoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.v1.UserLoginReply'
+    /user/user/v1/reg:
+        post:
+            tags:
+                - User
+            description: 用户注册
+            operationId: User_CreateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.v1.CreateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.v1.CreateUserReply'
 components:
     schemas:
+        api.captcha.v1.GetCaptchaReply:
+            type: object
+            properties:
+                captchaId:
+                    type: string
+                data:
+                    type: string
+            description: GetCaptchaReply 获取验证码返回
+        api.captcha.v1.GetCountryIsoReply:
+            type: object
+            properties:
+                ios:
+                    type: string
+            description: GetCountryIsoReply 返回国家IOS
+        api.captcha.v1.VerifyCaptchaReply:
+            type: object
+            properties:
+                Status:
+                    type: boolean
+                    description: 邮箱
+            description: 验证验证码
         api.pay.v1.CreatePayReply:
             type: object
             properties:
@@ -307,6 +618,47 @@ components:
                 currency:
                     type: string
             description: 商品参数
+        api.project.v1.CreateBrandReply:
+            type: object
+            properties: {}
+        api.project.v1.CreateBrandRequest:
+            type: object
+            properties:
+                projectBrandName:
+                    type: string
+                projectBrandFirstLetter:
+                    type: string
+                projectBrandSort:
+                    type: integer
+                    format: uint32
+                projectBrandFactoryStatus:
+                    type: integer
+                    format: uint32
+                projectBrandShowStatus:
+                    type: integer
+                    format: uint32
+                projectBrandLogo:
+                    type: string
+                projectBrandBigPic:
+                    type: string
+                projectBrandBrandInfo:
+                    type: string
+            description: 创建品牌
+        api.project.v1.DeleteBrandReply:
+            type: object
+            properties: {}
+        api.project.v1.GetBrandReply:
+            type: object
+            properties: {}
+        api.project.v1.ListBrandReply:
+            type: object
+            properties: {}
+        api.project.v1.UpdateBrandReply:
+            type: object
+            properties: {}
+        api.project.v1.UpdateBrandRequest:
+            type: object
+            properties: {}
         api.role.v1.CheckActReply:
             type: object
             properties:
@@ -595,9 +947,166 @@ components:
                         format: int64
                     description: 部门ID
             description: 编辑角色
+        api.upload.v1.UpTokenRequestReply:
+            type: object
+            properties:
+                token:
+                    type: string
+        api.upload.v1.UploadFileBaseReply:
+            type: object
+            properties:
+                file:
+                    type: string
+        api.upload.v1.UploadFileBaseRequest:
+            type: object
+            properties:
+                file:
+                    type: string
+                path:
+                    type: string
+        api.user.v1.CreateUserReply:
+            type: object
+            properties:
+                Email:
+                    type: string
+                    description: 邮箱
+                Country:
+                    type: string
+                    description: 所属国家
+                Phone:
+                    type: string
+                    description: 电话
+                Token:
+                    type: string
+                    description: token
+                ExpiresAt:
+                    type: string
+                    description: 过期时间
+            description: CreateUserReply 创建用户返回
+        api.user.v1.CreateUserRequest:
+            type: object
+            properties:
+                Email:
+                    type: string
+                    description: 邮箱
+                Passwd:
+                    type: string
+                    description: 密码
+                Phone:
+                    type: string
+                    description: 电话
+                LastIp:
+                    type: string
+                    description: IP
+                AcceptLanguage:
+                    type: string
+                    description: 客户端头部
+            description: CreateUserRequest 创建用户
+        api.user.v1.RefreshTokenReply:
+            type: object
+            properties:
+                Token:
+                    type: string
+                    description: token
+                ExpiresAt:
+                    type: string
+                    description: 过期时间
+        api.user.v1.UserFindOrModifyPasswdReply:
+            type: object
+            properties:
+                Status:
+                    type: boolean
+                Url:
+                    type: string
+                urlStr:
+                    type: string
+            description: UserFindOrModifyPasswdReply 用户找回或修改密码返回
+        api.user.v1.UserFindOrModifyPasswdRequest:
+            type: object
+            properties:
+                Email:
+                    type: string
+                LastIp:
+                    type: string
+                    description: IP
+                AcceptLanguage:
+                    type: string
+                    description: 客户端头部
+                CaptchaId:
+                    type: string
+                    description: 验证码ID
+                Answer:
+                    type: string
+                    description: 回答
+            description: UserFindOrModifyPasswdRequest 用户找回或修改密码
+        api.user.v1.UserLoginReply:
+            type: object
+            properties:
+                Email:
+                    type: string
+                    description: 邮箱
+                Country:
+                    type: string
+                    description: 所属国家
+                Phone:
+                    type: string
+                    description: 电话
+                Token:
+                    type: string
+                    description: Token
+                ExpiresAt:
+                    type: string
+                    description: 过期时间
+            description: UserLoginReply 用户登录回复
+        api.user.v1.UserLoginRequest:
+            type: object
+            properties:
+                Email:
+                    type: string
+                    description: 邮箱
+                Passwd:
+                    type: string
+                    description: 密码
+                LastIp:
+                    type: string
+                    description: IP
+                AcceptLanguage:
+                    type: string
+                    description: 客户端头部
+            description: UserLoginRequest 用户登录
+        api.user.v1.UserModifyPasswdRequest:
+            type: object
+            properties:
+                Email:
+                    type: string
+                    description: 邮箱
+                Code:
+                    type: string
+                    description: 找回密码返回KEY
+                LastIp:
+                    type: string
+                    description: IP
+                Passwd:
+                    type: string
+                    description: 密码
+                AcceptLanguage:
+                    type: string
+                    description: 客户端头部
+            description: UserModifyPasswdRequest 修改密码
+        api.user.v1.UserReply:
+            type: object
+            properties:
+                Status:
+                    type: boolean
+            description: UserModifyPasswdReply 修改密码返回
 tags:
+    - name: Brand
+    - name: Captcha
     - name: Menu
       description: Menu 菜单接口
     - name: Pay
+    - name: QiNiu
+    - name: Query
     - name: Role
       description: 角色管理
+    - name: User

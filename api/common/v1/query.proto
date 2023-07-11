@@ -4,7 +4,7 @@ package api.captcha.v1;
 
 import "google/api/annotations.proto";
 import "validate/validate.proto";
-option go_package = "unlimited/api/captcha/v1;v1";
+option go_package = "common/api/captcha/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.captcha.v1";
 
@@ -12,7 +12,7 @@ service Query {
 	// 获取国家IOS
 	rpc GetCountryIso(GetCountryIsoRequest) returns (GetCountryIsoReply) {
 		option (google.api.http) = {
-			get : "/common/v1/GetCountryIso"
+			get : "/common/query/v1/GetCountryIso"
 		};
 	}
 }
